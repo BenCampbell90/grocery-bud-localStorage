@@ -1,26 +1,26 @@
 import { useState } from "react";
 import List from "./List";
+import Form from "./Form";
+import { nanoid } from "nanoid";
 
 const App = () => {
-  const [items, setItems] = useState(null);
-  const [form, setForm] = useState("");
+  const [items, setItems] = useState([]);
 
-  const handleSubmit = () => {};
-
-  const handleChange = (e) => {};
+  const addItem = (itemName) => {
+    const newItem = {
+      name: itemName,
+      id: nanoid(),
+      completed: false,
+    };
+    const newItems = [...items, newItem];
+    setItems(newItems);
+    console.log(items);
+  };
 
   return (
     <section className="section-center">
-      <form onSubmit={handleSubmit}>
-        <h4>Grocery Bud</h4>
-        <div className="form-control">
-          <input className="form-input" value={form} onChange={handleChange} />
-          <button className="btn" type="submit">
-            Add Item
-          </button>
-        </div>
-      </form>
-      <List />
+      <Form addItem={addItem} />
+      <List items={items} />
     </section>
   );
 };
