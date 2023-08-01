@@ -1,10 +1,20 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-const List = ({ items }) => {
+const List = ({ items, removeItem, editItem }) => {
   return (
-    <div>
-      <ListItem {items} />
+    <div className="items">
+      {items.map((item) => {
+        const { id } = item;
+        return (
+          <ListItem
+            key={id}
+            item={item}
+            removeItem={removeItem}
+            editItem={editItem}
+          />
+        );
+      })}
     </div>
   );
 };
